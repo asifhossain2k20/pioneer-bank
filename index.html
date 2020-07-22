@@ -8,6 +8,103 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 class="text-center">Welcome to Pioneer Bank</h1>
+    
+    <div id="login-area">
+        <h1 class="text-center">Welcome to Pioneer Bank</h1>
+        <div class="submit-area">
+            <input type="text" class="form-control" placeholder="Email">
+            <br>
+            <input type="password" class="form-control" placeholder="Password">
+            <br>
+            <button id="login" class="btn btn-success">Submit Here</button>
+        </div>
+    </div>
+    <div id="transition-area">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="status deposit">
+                    <h5>Deposit</h5>
+                    <h2>$<span id="currentDeposit">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="status withdraw">
+                    <h5>Withdraw</h5>
+                    <h2>$000</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="status balance">
+                    <h5>Balance</h5>
+                    <h2>$<span id="currentBalance">1200</span></h2>
+                </div>
+            </div>
+        </div>
+      
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Deposit</h4>
+                <input id="depositAmount" type="text" class="form-control" placeholder="$You want to deposit">
+                <br>
+                <button id="addDeposit" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Withdraw</h4>
+                <input id="withdrawAmount"type="text" class="form-control" placeholder="$You Want to WithDrow">
+                <br>
+                <button id="addwithdrow" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        //login event handler
+        const loginBtn=document.getElementById('login');
+        loginBtn.addEventListener('click',function(){
+            const loginArea=document.getElementById('login-area');
+            loginArea.style.display="none";
+            const transitionArea=document.getElementById('transition-area');
+            transitionArea.style.display="block";
+        })
+
+        //deposit Button event handler
+
+        const depositBtn=document.getElementById("addDeposit");
+        depositBtn.addEventListener("click",function(){
+           
+             const depositNumber = getInputElement("depositAmount");
+            // const currentDeposit=document.getElementById("currentDeposit").innerText;
+            // const currentDepositNumber=parseFloat(currentDeposit);
+            // const totalDeposit=currentDepositNumber+depositNumber;
+            // document.getElementById("currentDeposit").innerText=totalDeposit;
+
+            updateSpanText("currentDeposit",depositNumber);
+            updateSpanText("currentBalance",depositNumber);
+
+            document.getElementById("depositAmount").value="";
+            function updateSpanText(id,depositNumber){
+                const current=document.getElementById(id).innerText;
+                const currentNumber=parseFloat(current);
+                const totalAmount=currentNumber+depositNumber;
+                document.getElementById(id).innerText=totalAmount;
+            }
+
+
+        })
+        const withdrowBtn= document.getElementById("addwithdrow");
+        document.addEventListener('click',function(){
+                 const withdrowNumber=getInputElement("withdrawAmount")
+                  console.log(withdrowNumber);
+        })
+        function getInputElement(id){
+            const amount= document.getElementById(id).value;
+            const amountNumber= parseFloat(amount);
+            return amountNumber;
+        }
+    </script>
 </body>
 </html>
